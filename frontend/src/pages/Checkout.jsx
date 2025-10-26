@@ -32,7 +32,7 @@ const Checkout = () => {
     fetchCart();
   }, []);
 
-  const total = cart.reduce((sum, item) => sum + item.price, 0);
+  const total = cart.reduce((sum, item) => sum + item.product.price, 0);
   const shipping = cart.length > 0 ? 20 : 0;
   const totalAmount = total + shipping;
 
@@ -177,7 +177,7 @@ const Checkout = () => {
                 <div>
                   <p className="font-medium">{item.name}</p>
                 </div>
-                <p>${item.price}</p>
+                <p>${item.product.price}</p>
               </div>
             ))
           )}
