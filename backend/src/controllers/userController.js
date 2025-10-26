@@ -31,7 +31,8 @@ async function registerHandler(req,res) {
       res.cookie('token', token, {
         httpOnly: true,
         secure: true,        // must be true for https (Render uses https)
-        sameSite: "none"     // required for cross-origin cookies
+        sameSite: "none",
+        maxAge: 2 * 24 * 60 * 60 * 1000 // required for cross-origin cookies
       });
       res.status(201).json({
         message:`User created as ${role}`,
@@ -64,7 +65,8 @@ async function loginHandler(req,res) {
   res.cookie('token', token, {
         httpOnly: true,
         secure: true,        // must be true for https (Render uses https)
-        sameSite: "none"     // required for cross-origin cookies
+        sameSite: "none",
+        maxAge: 2 * 24 * 60 * 60 * 1000 // required for cross-origin cookies
       });
   res.status(201).json({
     message:'User loggedin',
@@ -72,7 +74,12 @@ async function loginHandler(req,res) {
   })
 }
 async function logoutHandler(req,res){
-  res.clearCookie('token')
+  res.cookie('token',null,{
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
+      expires: new Date(Date.now())
+  })
   return res.status(200).json({ message: 'Logout successful!' });
 }
 async function toCart(req, res) {
