@@ -28,7 +28,11 @@ async function registerHandler(req,res) {
       const token=jwt.sign({
         id:user._id
       },process.env.JWTSECRET_KEY)
-      res.cookie('token',token)
+      res.cookie('token', token, {
+        httpOnly: true,
+        secure: true,        // must be true for https (Render uses https)
+        sameSite: "none"     // required for cross-origin cookies
+      });
       res.status(201).json({
         message:`User created as ${role}`,
         user
@@ -57,7 +61,11 @@ async function loginHandler(req,res) {
   const token=jwt.sign({
     id:user._id
   },process.env.JWTSECRET_KEY)
-  res.cookie('token',token)
+  res.cookie('token', token, {
+        httpOnly: true,
+        secure: true,        // must be true for https (Render uses https)
+        sameSite: "none"     // required for cross-origin cookies
+      });
   res.status(201).json({
     message:'User loggedin',
     user
