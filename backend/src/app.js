@@ -11,7 +11,7 @@ const productRoute=require('./routes/productRoute')
 const orderRoute = require('./routes/orderRoute');
 const cors = require('cors');
 app.use(cors({
-  origin: ['http://localhost:5173'],
+  origin: ['https://fullstack-ecommerce-frontend-kmh6.onrender.com'],
   credentials: true               
 }));
 app.use(express.json())
