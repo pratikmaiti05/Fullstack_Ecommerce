@@ -175,7 +175,7 @@ const Checkout = () => {
                 className="flex justify-between items-center border-b pb-2"
               >
                 <div>
-                  <p className="font-medium">{item.name}</p>
+                  <p className="font-medium">{item.product.name}</p>
                 </div>
                 <p>${item.product.price}</p>
               </div>
